@@ -1,0 +1,28 @@
+<footer class="bg-dark text-light mt-auto">
+    <div class="container py-4">
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase">MonSite</h5>
+                <p class="small text-muted">
+                    © {{ "now"|date("Y") }} MonSite  
+                    <br>
+                    Tous droits réservés.
+                </p>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase">Navigation</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ path('app_home') }}" class="text-light text-decoration-none">Accueil</a></li>
+        
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center bg-black py-2 small">
+        Développé avec ❤️ sous Symfony
+    </div>
+</footer>
