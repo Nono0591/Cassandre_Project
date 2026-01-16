@@ -108,7 +108,8 @@
 | date_             | Date de facturation  | DATE     | —      | —             |
 | montant           | Montant total        | CURRENCY | —      | —             |
 | statut            | Statut de la facture | VARCHAR  | 50     | —             |
-| mode_de_paiement  | Mode de paiement     | VARCHAR  | 50     | —             |
+| mode_de_paiement
+  | Mode de paiement     | VARCHAR  | 50     | —             |
 | Id_salarié_       | Salarié émetteur     | COUNTER  | —      | Clé étrangère |
 | Id_audit          | Audit associé        | COUNTER  | —      | Clé étrangère |
 

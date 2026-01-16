@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -34,6 +36,17 @@ class Client
 
     #[ORM\Column(length: 20)]
     private ?string $adresse = null;
+
+    /**
+     * @var Collection<int, Audit>
+     */
+    #[ORM\OneToMany(targetEntity: Audit::class, mappedBy: 'client')]
+    private Collection $audit;
+
+    public function __construct()
+    {
+        $this->audit = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -108,6 +121,36 @@ class Client
     public function setAdresse(string $adresse): static
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Audit>
+     */
+    public function getAudit(): Collection
+    {
+        return $this->audit;
+    }
+
+    public function addAudit(Audit $audit): static
+    {
+        if (!$this->audit->contains($audit)) {
+            $this->audit->add($audit);
+            $audit->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudit(Audit $audit): static
+    {
+        if ($this->audit->removeElement($audit)) {
+            // set the owning side to null (unless already changed)
+            if ($audit->getClient() === $this) {
+                $audit->setClient(null);
+            }
+        }
 
         return $this;
     }
