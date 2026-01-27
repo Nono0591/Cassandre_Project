@@ -23,14 +23,15 @@
 
 ### Candidat
 
-| Donnée             | Description             | Type     | Taille | Contraintes  |
-|--------------------|-------------------------|----------|--------|--------------|
-| Id_candidat        | Identifiant du candidat | COUNTER  | —      | Clé primaire |
-| nom                | Nom du candidat         | VARCHAR  | 50     | Obligatoire  |
-| prénom             | Prénom du candidat      | VARCHAR  | 50     | Obligatoire  |
-| email              | Email du candidat       | VARCHAR  | 50     | Unique       |
-| téléphone          | Téléphone du candidat   | VARCHAR  | 50     | —            |
-| date_d_inscription | Date d'inscription      | DATE     | —      | Obligatoire  |
+| Champ              | Type        | Clé | Description             |
+| ------------------ | ----------- | --- | ----------------------- |
+| Id_candidat        | COUNTER     | PK  | Identifiant du candidat |
+| nom                | VARCHAR(50) |     | Nom                     |
+| prénom             | VARCHAR(50) |     | Prénom                  |
+| email              | VARCHAR(50) |     | Email                   |
+| téléphone          | VARCHAR(50) |     | Téléphone               |
+| date_d_inscription | DATE        |     | Date d’inscription      |
+
 
 ### Session de Certification
 
@@ -54,16 +55,19 @@
 
 ### Audit
 
-| Donnée              | Description             | Type     | Taille | Contraintes   |
-|---------------------|-------------------------|----------|--------|---------------|
-| Id_audit            | Identifiant de l'audit  | COUNTER  | —      | Clé primaire  |
-| date_d_intervention | Date de l'intervention  | DATE     | —      | —             |
-| statut              | Statut de l'audit       | VARCHAR  | 50     | —             |
-| reference_mission   | Référence de la mission | VARCHAR  | 50     | Unique        |
-| perimetre_declaré   | Périmètre déclaré       | VARCHAR  | 50     | —             |
-| rapport             | Rapport d'audit         | VARCHAR  | 50     | —             |
-| durée               | Durée de l'audit        | VARCHAR  | 50     | —             |
-| Id_client           | Client concerné         | COUNTER  | —      | Clé étrangère |
+| Champ               | Description            | Type    | Taille | Contraintes |
+| ------------------- | ---------------------- | ------- | ------ | ----------- |
+| Id_audit            | Identifiant de l’audit | COUNTER | —      | PK, NN      |
+| date_d_intervention | Date d’intervention    | DATE    | —      | NN          |
+| statut              | Statut de l’audit      | VARCHAR | 50     | NN          |
+| reference_mission   | Référence de mission   | VARCHAR | 50     | NN, UQ      |
+| perimetre_declaré   | Périmètre déclaré      | VARCHAR | 50     | NN          |
+| rapport             | Rapport d’audit        | VARCHAR | 50     |             |
+| durée               | Durée de l’audit       | VARCHAR | 50     | NN          |
+| lettre_de_mission   | Lettre de mission      | VARCHAR | 50     |             |
+| mandat              | Mandat                 | VARCHAR | 50     |             |
+| Id_client           | Client concerné        | COUNTER | —      | FK, NN      |
+
 
 ### Certification
 
@@ -99,19 +103,22 @@
 | date_de_publication       | Date de publication   | VARCHAR  | 50     | —             |
 | Id_salarié_               | Auteur                | COUNTER  | —      | Clé étrangère |
 
+
 ### Facture
 
-| Donnée            | Description          | Type     | Taille | Contraintes   |
-|-------------------|----------------------|----------|--------|---------------|
-| Id_facture        | Identifiant facture  | COUNTER  | —      | Clé primaire  |
-| numéro_de_facture | Numéro de facture    | VARCHAR  | 50     | Unique        |
-| date_             | Date de facturation  | DATE     | —      | —             |
-| montant           | Montant total        | CURRENCY | —      | —             |
-| statut            | Statut de la facture | VARCHAR  | 50     | —             |
-| mode_de_paiement
-  | Mode de paiement     | VARCHAR  | 50     | —             |
-| Id_salarié_       | Salarié émetteur     | COUNTER  | —      | Clé étrangère |
-| Id_audit          | Audit associé        | COUNTER  | —      | Clé étrangère |
+| Champ             | Description          | Type     | Taille | Contraintes   |
+| ----------------- | -------------------- | -------- | ------ | ------------- |
+| Id_facture        | Identifiant facture  | COUNTER  | —      | PK, NN        |
+| numéro_de_facture | Numéro de facture    | VARCHAR  | 50     | NN, UQ        |
+| date_             | Date de facture      | DATE     | —      | NN            |
+| montant           | Montant total        | CURRENCY | —      | NN, CHECK ≥ 0 |
+| statut            | Statut de la facture | VARCHAR  | 50     | NN            |
+| mode_de_paiement  | Mode de paiement     | VARCHAR  | 50     | NN            |
+| Id_abonnement     | Abonnement concerné  | COUNTER  | —      | FK, NN        |
+| Id_salarié_       | Salarié émetteur     | COUNTER  | —      | FK, NN        |
+| Id_audit          | Audit associé        | COUNTER  | —      | FK            |
+
+
 
 ### Ligne de Facture
 
